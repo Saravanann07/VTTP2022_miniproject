@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Success</title>
+</head>
+<body>
+    <h1>You have successfully logged in to StockStatus!</h1>
+    <h2>Welcome <span data-th-text="${username}"></span></h2>
+    <h3>My stock purchase history</h3>
+
+    <table border="1">
+        <tbody>
+            <th>Transaction ID</th>
+            <th>Ticker</th>
+            <th>Company Name</th>
+            <th>Quantity</th>
+            <th>Price per share (US$)</th>
+            <th>Total price (US$)</th>
+            <th>Status</th>
+        </tbody>
+    </table>
+    <br>
+    <form>
+    <button type="submit" formmethod="GET" formaction="/logout">
+        Logout
+    </button>
+    </form>
+</body>
+</html>

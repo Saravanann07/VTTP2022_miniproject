@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>StockStatus</title>
+</head>
+<body>
+    <h1>Welcome to StockStatus! </h1>
+    
+	<h2>Please enter your login details</h2>
+
+	<form method="POST" action="/authenticate">
+
+		<table>
+			<tr>
+				<td>
+					<label for="username">Username</label>
+				</td>
+				<td>
+					<input id="username" type="text" name="username" size="40" required>
+				</td>
+			</tr>
+            <tr>
+				<td>
+					<label for="username">Password</label>
+				</td>
+				<td>
+					<input id="password" type="password" name="password" size="40" required>
+				</td>
+			</tr>
+			
+		</table>
+
+
+		<button type="submit">Login</button>
+
+	</form>
+	
+</body>
+</html>
