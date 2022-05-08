@@ -1,4 +1,4 @@
-name: Deploy heroku
+name: Deploy to heroku
 on: 
   release:
     types: [published]
