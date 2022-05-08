@@ -36,7 +36,7 @@ public class UserController {
     @PostMapping(path="/authenticate")
     public ModelAndView postLogin(
         @RequestBody MultiValueMap<String, String> payload, HttpSession sess) {
-            // name in login_page shouod match multivaluemap (getFirst)
+            // name in login_page should match multivaluemap (getFirst)
             String username = payload.getFirst("username");
             String password = payload.getFirst("password");
             System.out.println(">>>>>>>>" + payload);
