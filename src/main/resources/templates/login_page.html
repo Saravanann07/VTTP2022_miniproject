@@ -30,11 +30,38 @@
 			</tr>
 			
 		</table>
-
-
 		<button type="submit">Login</button>
-
 	</form>
+
+	<h2>Not a user?</h2>
+	<h3>Register here!</h3>
+
+	<form data-th-action="@{/addUser}" method="post">
+		<table>
+			<tr>
+				<td>
+					<label for="username">Username</label>
+				</td>
+				<td>
+					<input type="text" name="username" size="40" required>
+				</td>
+			</tr>
+            <tr>
+				<td>
+					<label for="password">Password</label>
+				</td>
+				<td>
+					<input type="password" name="password" size="40" required>
+				</td>
+			</tr>
+			
+		</table>
+        
+        <button type="submit">Register</button>
+      </form>
+
+
+
 	
 </body>
 </html>
