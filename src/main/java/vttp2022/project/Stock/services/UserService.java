@@ -11,8 +11,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
+    // public boolean authenticate(String username, String password) {
+    //     return userRepo.checkUserExists(username, password);
+    // }
+
     public boolean authenticate(String username, String password) {
-        return userRepo.checkUserExists(username, password);
+        return 1 == userRepo.countUsersByNameAndPassword(username, password);
     }
     
 }

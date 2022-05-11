@@ -47,16 +47,20 @@ public class UserController {
             if (!userSvc.authenticate(username, password)) {
                 mvc.setStatus(HttpStatus.UNAUTHORIZED);
                 mvc.setViewName("error");
-                return mvc;
+                // return mvc;
 
              //successful   
             } else{     
-            mvc.addObject("username", username);
-            mvc.setStatus(HttpStatus.ACCEPTED);
-            mvc.setViewName("Homepage");
-                // sess.setAttribute("username", username);
-                // mvc = new ModelAndView("redirect:/protected/login_success");
-                return mvc; }    
+            // mvc.addObject("username", username);
+            // mvc.setStatus(HttpStatus.ACCEPTED);
+            // mvc.setViewName("Homepage");
+            
+            sess.setAttribute("username", username);
+            mvc = new ModelAndView("redirect:/protected/Homepage");
+            // return mvc;
+            }
+                
+            return mvc;
 
         }
     

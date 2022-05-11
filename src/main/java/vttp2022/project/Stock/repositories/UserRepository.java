@@ -13,15 +13,25 @@ public class UserRepository {
     @Autowired
     private JdbcTemplate template;
 
-    public boolean checkUserExists(String username, String password) {
-        final SqlRowSet result = template.queryForRowSet(SQL_CHECK_USER_EXISTS, username, password);
-        if (!result.next()) 
-            return false;
-        System.out.println(">>>>>>>>>>>" + result.getInt("login_success"));
-        return true;
+    // public boolean checkUserExists(String username, String password) {
+    //     final SqlRowSet result = template.queryForRowSet(SQL_CHECK_USER_EXISTS, username, password);
+    //     if (!result.next()) 
+    //         return false;
+    //     System.out.println(">>>>>>>>>>>" + result.getInt("login_success"));
+    //     return true;
         
+    // }
+
+    public int countUsersByNameAndPassword(String username, String password) {
+        SqlRowSet rs = template.queryForRowSet(SQL_CHECK_USER_EXISTS, username, password);
+        if (!rs.next())
+            return 0;
+        return rs.getInt("login_success");
     }
 
 
     
 }
+
+
+    
