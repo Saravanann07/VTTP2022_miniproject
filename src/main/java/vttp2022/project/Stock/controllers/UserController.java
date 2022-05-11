@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import vttp2022.project.Stock.exceptions.UserException;
 import vttp2022.project.Stock.services.UserService;
 
 @Controller
@@ -31,6 +32,27 @@ public class UserController {
     public String getLogout(HttpSession sess) {
         sess.invalidate();
         return "login_page";
+    }
+
+    @PostMapping(path = "/createUser")
+    public ModelAndView createUser(@RequestBody MultiValueMap<String, String> form) {
+
+        ModelAndView mvc = new ModelAndView();
+
+        String username = form.getFirst("username");
+        String password = form.getFirst("password");
+
+        try {
+            userSvc.createUser(username, password);
+        } catch (UserException ex) {
+            mvc.addObject("messageUser", "error: %s".formatted(ex.getReason()));
+            mvc.setStatus(HttpStatus.BAD_REQUEST);
+            ex.printStackTrace();
+        }
+
+        mvc.addObject("messageUser", "%s has been successully registered".formatted(username));
+        mvc.setViewName("login_page");
+        return mvc;
     }
 
     @PostMapping(path="/authenticate")

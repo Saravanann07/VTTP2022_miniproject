@@ -1,8 +1,11 @@
 package vttp2022.project.Stock.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import vttp2022.project.Stock.exceptions.UserException;
 import vttp2022.project.Stock.repositories.UserRepository;
 
 @Service
@@ -17,6 +20,19 @@ public class UserService {
 
     public boolean authenticate(String username, String password) {
         return 1 == userRepo.countUsersByNameAndPassword(username, password);
+    }
+
+    public void createUser(String username, String password) throws UserException{
+
+        Optional<Integer> opt = userRepo.userAlreadyExists(username, password);
+
+        if (opt.isPresent())
+            throw new UserException("%s has already been taken".formatted(username));
+
+        if (!userRepo.createUser(username, password))
+            throw new UserException("Cannot add %s as user. Please contact admin of StockStatus".formatted(username));
+
+        createUser(username, password);
     }
     
 }
