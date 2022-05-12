@@ -1,7 +1,5 @@
 package vttp2022.project.Stock.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +22,9 @@ public class UserService {
 
     public void createUser(String username, String password) throws UserException{
 
-        Optional<Integer> opt = userRepo.userAlreadyExists(username, password);
+        Integer user = userRepo.countUsersByNameAndPassword(username, password);
 
-        if (opt.isPresent())
+        if (user == 1)
             throw new UserException("%s has already been taken".formatted(username));
 
         if (!userRepo.createUser(username, password))

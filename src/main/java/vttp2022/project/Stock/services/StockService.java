@@ -2,6 +2,7 @@ package vttp2022.project.Stock.services;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -11,38 +12,47 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@Service
-public class StockService {
-    // //1
-    // private static final String URL = "https://finnhub.io/api/v1/quote?";
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
 
-    // //export FINNHUB_API_KEY = "c9t0usqad3ib0ug33qbg"
-    // @Value("${finnhub.api.key")
-    // private String finnhubKey;
+// @Service
+// public class StockService {
+//      //1
+//     private static final String URL = "https://finnhub.io/api/v1/quote?";
 
-    // public Float getQuote(String symbol){
+//    //export FINNHUB_API_KEY = "c9t0usqad3ib0ug33qbg"
+//     @Value("${finnhub.api.key")
+//     private String finnhubKey;
 
-    //     String quote = UriComponentsBuilder.fromUriString(URL)
-    //         .queryParam("symbol", symbol)
-    //         .queryParam("token", finnhubKey)
-    //         .toUriString();
-    //     System.out.println(">>>>>>>>" + quote);
+//     public Double getQuote(String symbol){
 
-    //     //3
-    //     RequestEntity<Void> req = RequestEntity
-    //         .get(quote)
-    //         .accept(MediaType.APPLICATION_JSON)
-    //         .build();
+//         String quote = UriComponentsBuilder.fromUriString(URL)
+//             .queryParam("symbol", symbol)
+//             .queryParam("token", finnhubKey)
+//             .toUriString();
+//         System.out.println(">>>>>>>>" + quote);
 
-    //     //4
-    //     RestTemplate template = new RestTemplate();
+//          //3
+//         RequestEntity<Void> req = RequestEntity
+//             .get(quote)
+//             .accept(MediaType.APPLICATION_JSON)
+//             .build();
 
-    //     //5 
-    //     ResponseEntity<String> resp = template.exchange(req, String.class);
+//         //4
+//         RestTemplate template = new RestTemplate();
 
-    //     //6
-    //     InputStream is = new ByteArrayInputStream(resp.getBody().getBytes());
+//          //5 
+//         ResponseEntity<String> resp = template.exchange(req, String.class);
+
+//         //6
+//         InputStream is = new ByteArrayInputStream(resp.getBody().getBytes());
+//         JsonReader reader = Json.createReader(is);
+//         JsonObject obj = reader.readObject();
+
+//         Double stockPrice = obj.getDouble("c");
+//         return null;
         
-    // }
+//     }
     
-}
+// }

@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import static vttp2022.project.Stock.repositories.Queries.*;
 
-import java.util.Optional;
-
 @Repository
 public class UserRepository {
 
@@ -31,15 +29,15 @@ public class UserRepository {
         return rs.getInt("login_success");
     }
 
-    public Optional<Integer> userAlreadyExists(String username, String password) {
-        final SqlRowSet rs = template.queryForRowSet(Queries.SQL_CHECK_USER_EXISTS, username, password);
-        int count = 0;
-        if (!rs.next())
-            return Optional.empty();
+    // public Optional<Integer> userAlreadyExists(String username, String password) {
+    //     final SqlRowSet rs = template.queryForRowSet(Queries.SQL_CHECK_USER_EXISTS, username, password);
+    //     int count = 0;
+    //     if (!rs.next())
+    //         return Optional.empty();
         
-            count ++;
-            return Optional.of(count);
-    }
+    //         count ++;
+    //         return Optional.of(count);
+    // }
 
     public boolean createUser(String username, String password) {
         int count = template.update(Queries.SQL_INSERT_USERS, username, password);
