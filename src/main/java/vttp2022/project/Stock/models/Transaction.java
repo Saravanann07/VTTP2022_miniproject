@@ -6,10 +6,10 @@ public class Transaction {
     
     private Integer transactionId;
     private Date purchaseDate;
-    private String ticker;
+    private String symbol;
     private String companyName;
     private Integer quantity;
-    private Float sharePrice;
+    private Float stockPrice;
     private Float totalPrice;
     public Integer getTransactionId() {
         return transactionId;
@@ -23,11 +23,11 @@ public class Transaction {
     public void setPurchaseDate(Date purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
-    public String getTicker() {
-        return ticker;
+    public String getSymbol() {
+        return symbol;
     }
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
     public String getCompanyName() {
         return companyName;
@@ -41,11 +41,11 @@ public class Transaction {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-    public Float getSharePrice() {
-        return sharePrice;
+    public Float getStockPrice() {
+        return stockPrice;
     }
-    public void setSharePrice(Float sharePrice) {
-        this.sharePrice = sharePrice;
+    public void setStockPrice(Float stockPrice) {
+        this.stockPrice = stockPrice;
     }
     public Float getTotalPrice() {
         return totalPrice;

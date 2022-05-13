@@ -2,8 +2,6 @@ package vttp2022.project.Stock.services;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.math.BigDecimal;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -19,7 +17,7 @@ import jakarta.json.JsonReader;
 @Service
 public class StockService {
 //      //1
-    private static final String URL = "https://finnhub.io/api/v1/quote?";
+    private static final String URL = "https://finnhub.io/api/v1/quote";
 
 //    //export FINNHUB_API_KEY = "c9t0usqad3ib0ug33qbg"
     @Value("${finnhub.api.key")
@@ -51,6 +49,7 @@ public class StockService {
         JsonObject obj = reader.readObject();
 
         Double stockPrice = obj.getJsonNumber("c").doubleValue();
+        System.out.println(">>>>>>>>" + stockPrice);
         return stockPrice;
         
     }
