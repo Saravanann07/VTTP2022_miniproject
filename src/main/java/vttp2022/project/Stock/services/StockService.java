@@ -16,43 +16,43 @@ import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 
-// @Service
-// public class StockService {
+@Service
+public class StockService {
 //      //1
-//     private static final String URL = "https://finnhub.io/api/v1/quote?";
+    private static final String URL = "https://finnhub.io/api/v1/quote?";
 
 //    //export FINNHUB_API_KEY = "c9t0usqad3ib0ug33qbg"
-//     @Value("${finnhub.api.key")
-//     private String finnhubKey;
+    @Value("${finnhub.api.key")
+    private String finnhubKey;
 
-//     public Double getQuote(String symbol){
+    public Double getQuote(String symbol){
 
-//         String quote = UriComponentsBuilder.fromUriString(URL)
-//             .queryParam("symbol", symbol)
-//             .queryParam("token", finnhubKey)
-//             .toUriString();
-//         System.out.println(">>>>>>>>" + quote);
+        String quote = UriComponentsBuilder.fromUriString(URL)
+            .queryParam("symbol", symbol)
+            .queryParam("token", finnhubKey)
+            .toUriString();
+        System.out.println(">>>>>>>>" + quote);
 
 //          //3
-//         RequestEntity<Void> req = RequestEntity
-//             .get(quote)
-//             .accept(MediaType.APPLICATION_JSON)
-//             .build();
+        RequestEntity<Void> req = RequestEntity
+            .get(quote)
+            .accept(MediaType.APPLICATION_JSON)
+            .build();
 
 //         //4
-//         RestTemplate template = new RestTemplate();
+        RestTemplate template = new RestTemplate();
 
 //          //5 
-//         ResponseEntity<String> resp = template.exchange(req, String.class);
+        ResponseEntity<String> resp = template.exchange(req, String.class);
 
 //         //6
-//         InputStream is = new ByteArrayInputStream(resp.getBody().getBytes());
-//         JsonReader reader = Json.createReader(is);
-//         JsonObject obj = reader.readObject();
+        InputStream is = new ByteArrayInputStream(resp.getBody().getBytes());
+        JsonReader reader = Json.createReader(is);
+        JsonObject obj = reader.readObject();
 
-//         Double stockPrice = obj.getDouble("c");
-//         return null;
+        Double stockPrice = obj.getJsonNumber("c").doubleValue();
+        return stockPrice;
         
-//     }
+    }
     
-// }
+}
