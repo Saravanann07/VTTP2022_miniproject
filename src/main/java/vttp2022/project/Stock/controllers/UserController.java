@@ -73,12 +73,12 @@ public class UserController {
 
              //successful   
             } else{     
-            // mvc.addObject("username", username);
-            // mvc.setStatus(HttpStatus.ACCEPTED);
-            // mvc.setViewName("Homepage");
+            mvc.addObject("username", username);
+            mvc.setStatus(HttpStatus.ACCEPTED);
+            mvc.setViewName("Homepage");
             
-            sess.setAttribute("username", username);
-            mvc = new ModelAndView("redirect:/protected/Homepage");
+            // sess.setAttribute("username", username);
+            // mvc = new ModelAndView("redirect:/protected/Homepage");
             // return mvc;
             }
                 

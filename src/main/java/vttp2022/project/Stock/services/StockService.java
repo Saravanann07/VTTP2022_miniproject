@@ -19,7 +19,7 @@ public class StockService {
 //      //1
     private static final String URL = "https://finnhub.io/api/v1/quote";
 
-//    //export FINNHUB_API_KEY = "c9t0usqad3ib0ug33qbg"
+//    //export FINNHUB_API_KEY = "lo"
     @Value("${finnhub.api.key")
     private String finnhubKey;
 
