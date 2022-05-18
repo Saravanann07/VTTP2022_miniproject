@@ -13,7 +13,7 @@
 
     <table border="1">
         <tbody>
-            <th>Transaction ID</th>
+            <!-- <th>Transaction ID</th> -->
             <th>Date of Purchase</th>
             <th>Ticker</th>
             <th>Company Name</th>
@@ -21,13 +21,76 @@
             <th>Price per share (US$)</th>
             <th>Total price (US$)</th>
             <th>Status</th>
+
+            <tr data-th-each="transaction: ${transactionList}">
+                    <!-- <td data-th-text="${transaction.getTransactionId}"></td> -->
+                    <td data-th-text="${transaction.getPurchaseDate}"></td>
+                    <td data-th-text="${transaction.getSymbol}"></td>
+                    <td data-th-text="${transaction.getCompanyName}"></td>
+                    <td data-th-text="${transaction.getQuantity}"></td>
+                    <td data-th-text="${transaction.getStockPrice}"></td>
+                    <td data-th-text="${transaction.getTotalPrice}"></td>
+                    <td data-th-text="${transaction.getStockStatus}"></td>
+
+            </tr>
         </tbody>
     </table>
     <br>
     <br>
     <br>
     <h3>Made a trade recently? Add your purchase here</h3>
-    <form action="">
+    <form 
+        data-th-action="@{authenticate/addTransaction}"
+        method="post"
+        style="margin: 0; padding: 0"
+     >
+     <div>
+        <input
+        style="display: inline"
+        type="date"
+        name="purchaseDate"
+        placeholder="Purchase Date"
+      />
+        <input
+        style="display: inline"
+        type="text"
+        name="symbol"
+        placeholder="Company ticker"
+        />
+        <input
+        style="display: inline"
+        type="text"
+        name="companyName"
+        placeholder="Name of Company"
+      />
+      <input
+      style="display: inline"
+      type="number" step="any"
+      name="quantity"
+      placeholder="Quantity"
+    />
+    <input
+    style="display: inline"
+    type="number" step="0.01"
+    name="stockPrice"
+    placeholder="Price per stock"
+  />
+    <input
+    style="display: inline"
+    type="number" step="0.01"
+    name="totalPrice"
+    placeholder="Total cost of stock purchase"
+    />
+
+    <!-- <input
+    style="display: inline"
+    type="number" 
+    name="userId"
+    placeholder="User"
+    /> -->
+     </div>
+     <br>
+     <br>
         <button style="display: inline" type="submit">Add stock purchase</button>
     </form>
     <br>

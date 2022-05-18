@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Stock Purchase Details</h1>
+    <table border="1">
+        <tbody>
+            <!-- <th>Transaction ID</th> -->
+            <th>Date of Purchase</th>
+            <th>Ticker</th>
+            <th>Company Name</th>
+            <th>Quantity</th>
+            <th>Price per share (US$)</th>
+            <th>Total price (US$)</th>
+            <th>Status</th>
+
+            <tr data-th-each="transaction: ${allPurchasesList}">
+                    <!-- <td data-th-text="${transaction.getTransactionId}"></td> -->
+                    <td data-th-text="${transaction.getPurchaseDate}"></td>
+                    <td data-th-text="${transaction.getSymbol}"></td>
+                    <td data-th-text="${transaction.getCompanyName}"></td>
+                    <td data-th-text="${transaction.getQuantity}"></td>
+                    <td data-th-text="${transaction.getStockPrice}"></td>
+                    <td data-th-text="${transaction.getTotalPrice}"></td>
+                    <td data-th-text="${transaction.getStockStatus}"></td>
+
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

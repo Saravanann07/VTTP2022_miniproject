@@ -9,8 +9,11 @@ public class Transaction {
     private String symbol;
     private String companyName;
     private Integer quantity;
-    private Float stockPrice;
-    private Float totalPrice;
+    private Double stockPrice;
+    private Double totalPrice;
+    private Double stockStatus;
+
+  
     public Integer getTransactionId() {
         return transactionId;
     }
@@ -41,17 +44,24 @@ public class Transaction {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-    public Float getStockPrice() {
+    public Double getStockPrice() {
         return stockPrice;
     }
-    public void setStockPrice(Float stockPrice) {
+    public void setStockPrice(Double stockPrice) {
         this.stockPrice = stockPrice;
     }
-    public Float getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
-    public void setTotalPrice(Float totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Double getStockStatus() {
+        return stockStatus;
+    }
+    public void setStockStatus(Double stockStatus) {
+        this.stockStatus = stockStatus;
     }
 
     

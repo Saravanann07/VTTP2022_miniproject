@@ -1,5 +1,11 @@
 package vttp2022.project.Stock.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +17,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import vttp2022.project.Stock.exceptions.TransactionException;
 import vttp2022.project.Stock.exceptions.UserException;
+import vttp2022.project.Stock.models.Transaction;
+import vttp2022.project.Stock.models.User;
+import vttp2022.project.Stock.repositories.UserRepository;
+import vttp2022.project.Stock.services.StockService;
+import vttp2022.project.Stock.services.TransactionService;
 import vttp2022.project.Stock.services.UserService;
 
 @Controller
@@ -22,6 +35,15 @@ public class UserController {
 
     @Autowired 
     private UserService userSvc;
+
+    @Autowired
+    private TransactionService transactionSvc;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private StockService stockSvc;
 
     @GetMapping(path="")
     public String AddUser(Model model){
@@ -62,22 +84,31 @@ public class UserController {
             String username = payload.getFirst("username");
             String password = payload.getFirst("password");
             System.out.println(">>>>>>>>" + payload);
+            User user = userRepository.getUser(username, password);
 
             ModelAndView mvc = new ModelAndView();
             
             // not successful
             if (!userSvc.authenticate(username, password)) {
                 mvc.setStatus(HttpStatus.UNAUTHORIZED);
-                mvc.setViewName("error");
+                mvc.setViewName("login_error");
                 // return mvc;
 
              //successful   
             } else{     
             mvc.addObject("username", username);
+
+            Optional<List<Transaction>> optTransaction = transactionSvc.getUserTransactions(user.getUserId());
+            List<Transaction> transactionList = optTransaction.get();
+
+            
+            mvc.addObject("transactionList", transactionList);
+            mvc.setViewName("HomePage");
             mvc.setStatus(HttpStatus.ACCEPTED);
             mvc.setViewName("Homepage");
             
-            // sess.setAttribute("username", username);
+            sess.setAttribute("username", username);
+            sess.setAttribute("password", password);
             // mvc = new ModelAndView("redirect:/protected/Homepage");
             // return mvc;
             }
@@ -85,5 +116,83 @@ public class UserController {
             return mvc;
 
         }
+
+    @PostMapping(path="/authenticate/addTransaction")
+    public ModelAndView addStockPurchase(@RequestBody MultiValueMap<String, String> form, HttpSession sess) {
+
+        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        // int user_id = SQL_GET_USER -> auth.getName() --> return user_id
+        // userSvc.createTransaction(auth.getName());
+        
+            String username = (String) sess.getAttribute("username");
+            String password = (String) sess.getAttribute("password");
+            
+
+
+        ModelAndView mvc = new ModelAndView();
+        String dateStr = form.getFirst("purchaseDate");
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date purchaseDate;
+        try {
+            purchaseDate = format.parse(dateStr);
+        } catch (ParseException e) {
+            purchaseDate = null;
+            e.printStackTrace();
+        }
+
+        String symbol = form.getFirst("symbol");
+        String companyName = form.getFirst("companyName");
+        Integer quantity = Integer.parseInt(form.getFirst("quantity"));
+        Double stockPrice = Double.parseDouble(form.getFirst("stockPrice"));
+        Double totalPrice = Double.parseDouble(form.getFirst("totalPrice"));
+        User user = userRepository.getUser(username, password);
+        
+        // Integer userId = User.getUserId();
+        // Integer userId = Integer.parseInt(form.getFirst("userId"));
+        // Integer userId = 17;
+
+        Double marketPrice = stockSvc.getQuote(symbol);
+        Double stockStatus = marketPrice*quantity;
+
+        try {
+            transactionSvc.addTransaction(user.getUserId(), purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice, stockStatus);
+        } catch (TransactionException ex) {
+            mvc.addObject("transactionMessage", "error: %s".formatted(ex.getReason()));
+            mvc.setStatus(HttpStatus.BAD_REQUEST);
+            ex.printStackTrace();
+        }
+
+        Optional<List<Transaction>> optTransaction = transactionSvc.getUserTransactions(user.getUserId());
+        List<Transaction> transactionList = optTransaction.get();
+        mvc.addObject("username", username);
+        mvc.addObject("transactionUser", "%s has been successfully added to your stock purchases".formatted(symbol));
+        mvc.addObject("transactionList", transactionList);
+        // mvc.addObject("stockStatus", stockStatus);
+        mvc.setViewName("HomePage");
+        return mvc;
+    }
+
+    @GetMapping(path= "/authenticate/company") 
+        public ModelAndView getUserCompanyPurchase(@RequestParam("symbol") String symbol, HttpSession sess) {
+
+            String username = (String) sess.getAttribute("username");
+            String password = (String) sess.getAttribute("password");
+
+            ModelAndView mvc = new ModelAndView();
+
+            User user = userRepository.getUser(username, password);
+
+            Optional<List<Transaction>> optCompany = transactionSvc.getCompanyTransactions(symbol, user.getUserId());
+            List<Transaction> allPurchasesList = optCompany.get();
+
+            mvc.addObject("allPurchasesList", allPurchasesList);
+            // mvc.setStatus(HttpStatus.OK);
+            mvc.setViewName("company");
+
+            return mvc;
+        }
+
+
     
 }
