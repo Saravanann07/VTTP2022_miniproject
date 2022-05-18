@@ -22,16 +22,17 @@ public class StockService {
 //      //1
     private static final String URL = "https://finnhub.io/api/v1/quote?";
 
-   //export FINNHUB_API_KEY = "lo"
-    @Value("${finnhub.api.key")
-    private String finnhubKey;
+//    //export FINNHUB_API_KEY = "lo"
+//     @Value("${finnhub.api.key")
+//     private String finnhubKey;
+    public String finnhubKey = "c9t0usqad3ib0ug33qbg";
 
-    private boolean hasKey;
+//     private boolean hasKey;
 
-    @PostConstruct
-    private void init() {
-        hasKey = null != finnhubKey;
-    }
+//     @PostConstruct
+//     private void init() {
+//         hasKey = null != finnhubKey;
+//     }
     
 
     public Double getQuote(String symbol){
