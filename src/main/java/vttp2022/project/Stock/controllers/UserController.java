@@ -161,7 +161,9 @@ public class UserController {
             mvc.addObject("transactionMessage", "error: %s".formatted(ex.getReason()));
             mvc.setStatus(HttpStatus.BAD_REQUEST);
             ex.printStackTrace();
+            
         }
+        System.out.println(">>>>>>>>>errrrorrrrr");
 
         Optional<List<Transaction>> optTransaction = transactionSvc.getUserTransactions(user.getUserId());
         List<Transaction> transactionList = optTransaction.get();

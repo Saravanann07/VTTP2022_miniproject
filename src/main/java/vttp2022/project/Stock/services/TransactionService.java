@@ -62,11 +62,16 @@ public class TransactionService {
         Integer transaction = transactionRepo.transactionAlreadyAdded(symbol, stockPrice, userId);
 
         if (transaction == 1)
+        {
             throw new TransactionException("User has already added %s to their stock purchases".formatted(symbol));
-
-        if (!transactionRepo.addTransaction(userId, purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice, stockStatus))
-            throw new TransactionException("Cannot add %s into your stock purchases. Please contact admin of StockStatus".formatted(symbol));
-
-            addTransaction(userId, purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice, stockStatus);
+        } else{
+            try{
+                transactionRepo.addTransaction(userId, purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice, stockStatus);
+            } catch (Exception e) {
+            throw new TransactionException(
+                "Cannot add %s into your stock purchases. Please contact admin of StockStatus".formatted(symbol));
+            }
+        }
     }
+    
 }
