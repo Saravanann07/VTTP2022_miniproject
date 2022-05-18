@@ -67,7 +67,7 @@ public class TransactionService {
         } else{
             try{
                 transactionRepo.addTransaction(userId, purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice, stockStatus);
-            } catch (Exception e) {
+            } catch (Exception ex) {
             throw new TransactionException(
                 "Cannot add %s into your stock purchases. Please contact admin of StockStatus".formatted(symbol));
             }

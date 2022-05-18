@@ -171,7 +171,7 @@ public class UserController {
         mvc.addObject("transactionUser", "%s has been successfully added to your stock purchases".formatted(symbol));
         mvc.addObject("transactionList", transactionList);
         // mvc.addObject("stockStatus", stockStatus);
-        mvc.setViewName("HomePage");
+        mvc.setViewName("Homepage");
         return mvc;
     }
 
