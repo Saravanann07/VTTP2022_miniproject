@@ -20,7 +20,7 @@ import jakarta.json.JsonReader;
 @Service
 public class StockService {
 //      //1
-    private static final String URL = "https://finnhub.io/api/v1/quote?";
+    private static final String URL = "https://finnhub.io/api/v1/quote";
 
 //    //export FINNHUB_API_KEY = "lo"
 //     @Value("${finnhub.api.key")
