@@ -117,7 +117,7 @@ public class UserController {
 
         }
 
-    @PostMapping(path="/authenticate/addTransaction")
+    @PostMapping(path="/addTransaction")
     public ModelAndView addStockPurchase(@RequestBody MultiValueMap<String, String> form, HttpSession sess) {
 
         // Authentication auth = SecurityContextHolder.getContext().getAuthentication();

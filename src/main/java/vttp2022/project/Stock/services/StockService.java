@@ -3,9 +3,7 @@ package vttp2022.project.Stock.services;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import javax.annotation.PostConstruct;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
