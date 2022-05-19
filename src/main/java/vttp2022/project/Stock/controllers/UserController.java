@@ -24,7 +24,6 @@ import vttp2022.project.Stock.exceptions.TransactionException;
 import vttp2022.project.Stock.exceptions.UserException;
 import vttp2022.project.Stock.models.Transaction;
 import vttp2022.project.Stock.models.User;
-import vttp2022.project.Stock.models.Transaction;
 import vttp2022.project.Stock.repositories.UserRepository;
 import vttp2022.project.Stock.services.StockService;
 import vttp2022.project.Stock.services.TransactionService;
@@ -150,16 +149,7 @@ public class UserController {
         Double totalPrice = Double.parseDouble(form.getFirst("totalPrice"));
         User user = userRepository.getUser(username, password);
         
-        // Integer userId = User.getUserId();
-        // Integer userId = Integer.parseInt(form.getFirst("userId"));
-        // Integer userId = 17;
-
-        // Double marketPrice = stockSvc.getQuote(symbol);
-        // Double stockStatus = marketPrice*quantity;
-
-        // Double marketPrice = stockSvc.getQuote(symbol);
-        // Double stockStatus = marketPrice*(Transaction.getQuantity());
-
+    
         try {
             transactionSvc.addTransaction(user.getUserId(), purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice);
         } catch (TransactionException ex) {
@@ -173,8 +163,6 @@ public class UserController {
         Optional<List<Transaction>> optTransaction = transactionSvc.getUserTransactions(user.getUserId());
         List<Transaction> transactionList = optTransaction.get();
         
-
-       
         for (Transaction trans : transactionList) {
             
             Double marketPrice = stockSvc.getQuote(trans.getSymbol());

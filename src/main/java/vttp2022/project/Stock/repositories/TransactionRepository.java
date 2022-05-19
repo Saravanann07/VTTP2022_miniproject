@@ -20,12 +20,6 @@ public class TransactionRepository {
     @Autowired
     private JdbcTemplate template;
     
-    // public boolean addTransaction(Integer userId, Transaction t) {
-    //     int count = template.update(SQL_INSERT_TRANSACTION, t.getPurchaseDate(), t.getSymbol(), t.getCompanyName(),
-    //     t.getQuantity(), t.getStockPrice(), t.getTotalPrice(), userId);
-
-    //     return 1 == count;
-    // }
 
     public boolean addTransaction(Integer userId, Date purchaseDate, String symbol, String companyName, Integer quantity, Double stockPrice, Double totalPrice) {
         int count = template.update(SQL_INSERT_TRANSACTION, purchaseDate, symbol, companyName,
@@ -33,16 +27,6 @@ public class TransactionRepository {
 
         return 1 == count;
     }
-
-
-    // public Integer transactionAlreadyAdded(String symbol, Integer userId) {
-    //     final SqlRowSet rs = template.queryForRowSet(SQL_CHECK_IF_USER_HAS_MADE_TRANSACTIONS, symbol, userId);
-
-    //     if (!rs.next())
-    //         return 0;
-    //     return rs.getInt("company_added");
-
-    // }
 
     public Integer transactionAlreadyAdded(String symbol, Double stockPrice,Integer userId) {
         final SqlRowSet rs = template.queryForRowSet(SQL_CHECK_IF_USER_HAS_MADE_PURCHASE, symbol, stockPrice, userId);
@@ -93,12 +77,5 @@ public class TransactionRepository {
             companyTransactions.add(company);
         }
         return Optional.of(companyTransactions);    
-    }
-
-    // public Optional<List<Transaction>> updateStockStatus (String symbol, double stockStatus, int userId) {
-
-    //     List<Transaction> stockMarketValue = new LinkedList<>();
-    // }
-
-  
+    }  
 }
