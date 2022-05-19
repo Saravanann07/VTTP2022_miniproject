@@ -52,18 +52,36 @@ import vttp2022.project.Stock.repositories.UserRepository;
         return 1 == userRepo.countUsersByNameAndPassword(username, password);
     }
 
+    // public void createUser(String username, String password) throws UserException{
+
+    //     Integer user = userRepo.countUsersByNameAndPassword(username, password);
+
+    //     if (user == 1)
+    //         throw new UserException("%s has already been taken".formatted(username));
+
+    //     if (!userRepo.createUser(username, password))
+    //         throw new UserException("Cannot add %s as user. Please contact admin of StockStatus".formatted(username));
+
+    //     createUser(username, password);
+    // }
+
     public void createUser(String username, String password) throws UserException{
 
         Integer user = userRepo.countUsersByNameAndPassword(username, password);
 
         if (user == 1)
+        {
             throw new UserException("%s has already been taken".formatted(username));
-
-        if (!userRepo.createUser(username, password))
+        } else {
+            try{
+                userRepo.createUser(username, password);
+            } catch (Exception ex) {
             throw new UserException("Cannot add %s as user. Please contact admin of StockStatus".formatted(username));
-
-        createUser(username, password);
+            }
+        }
     }
+
+        
 
     // @Override
     // public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -175,7 +175,7 @@ public class UserController {
         return mvc;
     }
 
-    @GetMapping(path= "/authenticate/company") 
+    @GetMapping(path= "/company") 
         public ModelAndView getUserCompanyPurchase(@RequestParam("symbol") String symbol, HttpSession sess) {
 
             String username = (String) sess.getAttribute("username");

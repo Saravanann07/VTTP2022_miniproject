@@ -20,5 +20,4 @@ public interface Queries {
     public static final String SQL_CHECK_IF_USER_HAS_MADE_PURCHASE = "select count(*) as purchase_added from transactions WHERE symbol = ? and stock_price = ? and user_id = ?";
 
     public static final String SQL_GET_USER_COMPANY_TRANSACTIONS = "select * from transactions where symbol = ? and user_id = ?";
-
 }

@@ -92,10 +92,13 @@ public class TransactionRepository {
 
             companyTransactions.add(company);
         }
-        return Optional.of(companyTransactions);
-
-        
+        return Optional.of(companyTransactions);    
     }
+
+    // public Optional<List<Transaction>> updateStockStatus (String symbol, double stockStatus, int userId) {
+
+    //     List<Transaction> stockMarketValue = new LinkedList<>();
+    // }
 
   
 }
