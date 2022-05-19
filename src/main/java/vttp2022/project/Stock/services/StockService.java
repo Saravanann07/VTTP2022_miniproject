@@ -3,6 +3,8 @@ package vttp2022.project.Stock.services;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -21,16 +23,17 @@ public class StockService {
     private static final String URL = "https://finnhub.io/api/v1/quote";
 
    //export FINNHUB_API_KEY = ""
-    @Value("${finnhub.api.key")
-    private String finnhubKey;
+    // @Value("${finnhub.api.key")
+    // private String finnhubKey;
     // public String finnhubKey = "";
+    public String finnhubKey = "c9t0usqad3ib0ug33qbg";
 
-//     private boolean hasKey;
+    private boolean hasKey;
 
-//     @PostConstruct
-//     private void init() {
-//         hasKey = null != finnhubKey;
-//     }
+    @PostConstruct
+    private void init() {
+        hasKey = null != finnhubKey;
+    }
     
 
     public Double getQuote(String symbol){
