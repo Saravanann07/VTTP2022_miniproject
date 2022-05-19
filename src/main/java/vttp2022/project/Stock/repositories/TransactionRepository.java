@@ -27,9 +27,9 @@ public class TransactionRepository {
     //     return 1 == count;
     // }
 
-    public boolean addTransaction(Integer userId, Date purchaseDate, String symbol, String companyName, Integer quantity, Double stockPrice, Double totalPrice, Double stockStatus) {
+    public boolean addTransaction(Integer userId, Date purchaseDate, String symbol, String companyName, Integer quantity, Double stockPrice, Double totalPrice) {
         int count = template.update(SQL_INSERT_TRANSACTION, purchaseDate, symbol, companyName,
-        quantity, stockPrice, totalPrice, userId, stockStatus);
+        quantity, stockPrice, totalPrice, userId);
 
         return 1 == count;
     }
@@ -67,7 +67,7 @@ public class TransactionRepository {
             transaction.setQuantity(rs.getInt("quantity")); // int
             transaction.setStockPrice(rs.getDouble("stock_price")); // double
             transaction.setTotalPrice(rs.getDouble("total_price")); // double
-            transaction.setStockStatus(rs.getDouble("stock_status")); //double
+            // transaction.setStockStatus(rs.getDouble("stock_status")); //double
 
             userTransactions.add(transaction);
         }
@@ -88,7 +88,7 @@ public class TransactionRepository {
             company.setQuantity(rs.getInt("quantity")); // int
             company.setStockPrice(rs.getDouble("stock_price")); // double
             company.setTotalPrice(rs.getDouble("total_price")); // double
-            company.setStockStatus(rs.getDouble("stock_status")); //double
+            // company.setStockStatus(rs.getDouble("stock_status")); //double
 
             companyTransactions.add(company);
         }

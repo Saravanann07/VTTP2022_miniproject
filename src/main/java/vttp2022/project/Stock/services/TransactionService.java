@@ -57,7 +57,7 @@ public class TransactionService {
     //         addTransaction(userId, purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice, stockStatus);
     // }
 
-    public void addTransaction(Integer userId, Date purchaseDate, String symbol, String companyName, Integer quantity, Double stockPrice, Double totalPrice, Double stockStatus) throws TransactionException{
+    public void addTransaction(Integer userId, Date purchaseDate, String symbol, String companyName, Integer quantity, Double stockPrice, Double totalPrice) throws TransactionException{
 
         Integer transaction = transactionRepo.transactionAlreadyAdded(symbol, stockPrice, userId);
 
@@ -66,7 +66,7 @@ public class TransactionService {
             throw new TransactionException("User has already added %s to their stock purchases".formatted(symbol));
         } else{
             try{
-                transactionRepo.addTransaction(userId, purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice, stockStatus);
+                transactionRepo.addTransaction(userId, purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice);
             } catch (Exception ex) {
             throw new TransactionException(
                 "Cannot add %s into your stock purchases. Please contact admin of StockStatus".formatted(symbol));

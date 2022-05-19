@@ -24,6 +24,7 @@ import vttp2022.project.Stock.exceptions.TransactionException;
 import vttp2022.project.Stock.exceptions.UserException;
 import vttp2022.project.Stock.models.Transaction;
 import vttp2022.project.Stock.models.User;
+import vttp2022.project.Stock.models.Transaction;
 import vttp2022.project.Stock.repositories.UserRepository;
 import vttp2022.project.Stock.services.StockService;
 import vttp2022.project.Stock.services.TransactionService;
@@ -100,6 +101,13 @@ public class UserController {
 
             Optional<List<Transaction>> optTransaction = transactionSvc.getUserTransactions(user.getUserId());
             List<Transaction> transactionList = optTransaction.get();
+            for (Transaction trans : transactionList) {
+                //Gets market value of stocks everytime user refreshes page
+                Double marketPrice = stockSvc.getQuote(trans.getSymbol());
+                trans.setStockStatus(marketPrice*trans.getQuantity());
+                System.out.println(">>>>>" + marketPrice);
+                System.out.println(">>>>>>" + trans.getStockStatus());
+            }
 
             
             mvc.addObject("transactionList", transactionList);
@@ -109,8 +117,6 @@ public class UserController {
             
             sess.setAttribute("username", username);
             sess.setAttribute("password", password);
-            // mvc = new ModelAndView("redirect:/protected/Homepage");
-            // return mvc;
             }
                 
             return mvc;
@@ -119,10 +125,6 @@ public class UserController {
 
     @PostMapping(path="/addTransaction")
     public ModelAndView addStockPurchase(@RequestBody MultiValueMap<String, String> form, HttpSession sess) {
-
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // int user_id = SQL_GET_USER -> auth.getName() --> return user_id
-        // userSvc.createTransaction(auth.getName());
         
             String username = (String) sess.getAttribute("username");
             String password = (String) sess.getAttribute("password");
@@ -152,11 +154,14 @@ public class UserController {
         // Integer userId = Integer.parseInt(form.getFirst("userId"));
         // Integer userId = 17;
 
-        Double marketPrice = stockSvc.getQuote(symbol);
-        Double stockStatus = marketPrice*quantity;
+        // Double marketPrice = stockSvc.getQuote(symbol);
+        // Double stockStatus = marketPrice*quantity;
+
+        // Double marketPrice = stockSvc.getQuote(symbol);
+        // Double stockStatus = marketPrice*(Transaction.getQuantity());
 
         try {
-            transactionSvc.addTransaction(user.getUserId(), purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice, stockStatus);
+            transactionSvc.addTransaction(user.getUserId(), purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice);
         } catch (TransactionException ex) {
             mvc.addObject("transactionMessage", "error: %s".formatted(ex.getReason()));
             mvc.setStatus(HttpStatus.BAD_REQUEST);
@@ -167,6 +172,16 @@ public class UserController {
 
         Optional<List<Transaction>> optTransaction = transactionSvc.getUserTransactions(user.getUserId());
         List<Transaction> transactionList = optTransaction.get();
+        
+
+       
+        for (Transaction trans : transactionList) {
+            
+            Double marketPrice = stockSvc.getQuote(trans.getSymbol());
+            trans.setStockStatus(marketPrice*trans.getQuantity());
+            System.out.println(">>>>>" + marketPrice);
+            System.out.println(">>>>>>" + trans.getStockStatus());
+        }
         mvc.addObject("username", username);
         mvc.addObject("transactionUser", "%s has been successfully added to your stock purchases".formatted(symbol));
         mvc.addObject("transactionList", transactionList);
@@ -175,6 +190,7 @@ public class UserController {
         return mvc;
     }
 
+    // Group all purchases made by user from a specific company. Identified by symbol/ticker
     @GetMapping(path= "/company") 
         public ModelAndView getUserCompanyPurchase(@RequestParam("symbol") String symbol, HttpSession sess) {
 
@@ -187,6 +203,14 @@ public class UserController {
 
             Optional<List<Transaction>> optCompany = transactionSvc.getCompanyTransactions(symbol, user.getUserId());
             List<Transaction> allPurchasesList = optCompany.get();
+
+            for (Transaction trans : allPurchasesList) {
+            
+                Double marketPrice = stockSvc.getQuote(trans.getSymbol());
+                trans.setStockStatus(marketPrice*trans.getQuantity());
+                System.out.println(">>>>>" + marketPrice);
+                System.out.println(">>>>>>" + trans.getStockStatus());
+            }
 
             mvc.addObject("allPurchasesList", allPurchasesList);
             // mvc.setStatus(HttpStatus.OK);
