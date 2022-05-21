@@ -57,8 +57,8 @@ public class LoginTests {
         RequestBuilder req = MockMvcRequestBuilders.post("/authenticate")
             .accept(MediaType.TEXT_HTML_VALUE)
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("username", "Priya")
-            .param("password", "priya")
+            .param("username", "Fred")
+            .param("password", "fred")
             .session(session);
 
         MvcResult result = null;
@@ -149,9 +149,9 @@ public class LoginTests {
 
         RequestBuilder req = MockMvcRequestBuilders.get("/homepage")
             .accept(MediaType.TEXT_HTML_VALUE)
-            .sessionAttr("username", "Priya")
-            .sessionAttr("password", "priya");
-            
+            .sessionAttr("username", "Fred")
+            .sessionAttr("password", "fred");
+
         // Call the controller
         MvcResult result = null;
         try {
