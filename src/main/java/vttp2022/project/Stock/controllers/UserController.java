@@ -51,9 +51,12 @@ public class UserController {
     }
 
     @GetMapping(path="/logout")
-    public String getLogout(HttpSession sess) {
+    public ModelAndView getLogout(HttpSession sess) {
         sess.invalidate();
-        return "login_page";
+        ModelAndView mvc = new ModelAndView();
+        mvc.setViewName("login_page");
+
+        return mvc;
     }
 
     @PostMapping(path = "/createUser")
