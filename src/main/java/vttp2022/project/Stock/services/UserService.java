@@ -28,7 +28,8 @@ import vttp2022.project.Stock.repositories.UserRepository;
         } else {
             try{
                 userRepo.createUser(username, password);
-            } catch (Exception ex) {
+            } 
+            catch (Exception ex) {
             throw new UserException("Cannot add %s as user. Please contact admin of StockStatus".formatted(username));
             }
         }

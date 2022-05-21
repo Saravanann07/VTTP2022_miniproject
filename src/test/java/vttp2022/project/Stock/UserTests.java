@@ -4,14 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -35,18 +33,14 @@ public class UserTests {
     @Autowired
     private UserService userSvc;
 
-    private User user;
+    // private User user;
 
-    public UserTests() {
-        user = new User();
-        user.setUsername("User");
-        user.setPassword("user");
-    }
-
-    // @BeforeEach
-    // public void setup() {
-    //     userRepo.createUser("User", "user");
+    // public UserTests() {
+    //     user = new User();
+    //     user.setUsername("User");
+    //     user.setPassword("user");
     // }
+
     
 
     @Test
@@ -61,6 +55,8 @@ public class UserTests {
         fail("Did not throw UserException when username is taken");
     }
 
+    
+
     @Test 
     public void authenticateSaravananShouldPass() {
 
@@ -68,11 +64,68 @@ public class UserTests {
 
        Integer authenticate =  userRepo.countUsersByNameAndPassword("Saravanan", "sara");
        
-       assertTrue(true);
-
+       assertEquals(count, authenticate);
     }
 
-  
+    @Test
+    public  void createUserFail(){
 
-    
+        RequestBuilder req = MockMvcRequestBuilders.post("/createUser")
+            .accept(MediaType.TEXT_HTML_VALUE)
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("username", "Fred")
+            .param("password", "fred");
+            
+
+        // Call the controller
+        MvcResult result = null;
+        try {
+            result = mvc.perform(req).andReturn();
+        } catch (Exception ex) {
+            fail("cannot perform mvc invocation for unsuccessful login", ex);
+            return;
+        }
+
+        // Get response
+        MockHttpServletResponse resp = result.getResponse();
+        try {
+            Integer statusCode = resp.getStatus();
+            assertEquals(400,statusCode);
+        } catch (Exception ex) {
+            fail("cannot retrieve response for unsuccessful login", ex);
+            return;
+        }
+    }
+
+    @Test
+    public  void createUserSuccess(){
+
+        RequestBuilder req = MockMvcRequestBuilders.post("/createUser")
+            .accept(MediaType.TEXT_HTML_VALUE)
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("username", "SAR")
+            .param("password", "sar");
+            
+
+        // Call the controller
+        MvcResult result = null;
+        try {
+            result = mvc.perform(req).andReturn();
+        } catch (Exception ex) {
+            fail("cannot perform mvc invocation for unsuccessful login", ex);
+            return;
+        }
+
+        // Get response
+        MockHttpServletResponse resp = result.getResponse();
+        try {
+            Integer statusCode = resp.getStatus();
+            assertEquals(200,statusCode);
+        } catch (Exception ex) {
+            fail("cannot retrieve response for unsuccessful login", ex);
+            return;
+        }
+    }
+        
+     
 }
