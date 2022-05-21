@@ -28,12 +28,12 @@ public class StockService {
     // public String finnhubKey = "";
     public String finnhubKey = "c9t0usqad3ib0ug33qbg";
 
-    private boolean hasKey;
+    // private boolean hasKey;
 
-    @PostConstruct
-    private void init() {
-        hasKey = null != finnhubKey;
-    }
+    // @PostConstruct
+    // private void init() {
+    //     hasKey = null != finnhubKey;
+    // }
     
 
     public Double getQuote(String symbol){

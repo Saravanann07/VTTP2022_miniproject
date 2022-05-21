@@ -66,13 +66,14 @@ public class UserController {
 
         try {
             userSvc.createUser(username, password);
+            mvc.addObject("messageUser", "%s has been successully registered".formatted(username));
+
         } catch (UserException ex) {
-            mvc.addObject("messageUser", "error: %s".formatted(ex.getReason()));
+            mvc.addObject("messageUser", "Error: %s".formatted(ex.getReason()));
             mvc.setStatus(HttpStatus.BAD_REQUEST);
             ex.printStackTrace();
         }
 
-        mvc.addObject("messageUser", "%s has been successully registered".formatted(username));
         mvc.setViewName("login_page");
         return mvc;
     }
@@ -152,6 +153,8 @@ public class UserController {
     
         try {
             transactionSvc.addTransaction(user.getUserId(), purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice);
+            mvc.addObject("transactionUser", "%s has been successfully added to your stock purchases".formatted(symbol));
+
         } catch (TransactionException ex) {
             mvc.addObject("transactionMessage", "error: %s".formatted(ex.getReason()));
             mvc.setStatus(HttpStatus.BAD_REQUEST);
@@ -171,7 +174,7 @@ public class UserController {
             System.out.println(">>>>>>" + trans.getStockStatus());
         }
         mvc.addObject("username", username);
-        mvc.addObject("transactionUser", "%s has been successfully added to your stock purchases".formatted(symbol));
+        // mvc.addObject("transactionUser", "%s has been successfully added to your stock purchases".formatted(symbol));
         mvc.addObject("transactionList", transactionList);
         // mvc.addObject("stockStatus", stockStatus);
         mvc.setViewName("Homepage");
@@ -206,6 +209,34 @@ public class UserController {
 
             return mvc;
         }
+
+        @GetMapping(path="/homepage")
+            public ModelAndView getHomePage(HttpSession sess) {
+
+                String username = (String) sess.getAttribute("username");
+                String password = (String) sess.getAttribute("password");
+
+                ModelAndView mvc = new ModelAndView();
+
+                User user = userRepository.getUser(username, password);
+
+                Optional<List<Transaction>> optTransaction = transactionSvc.getUserTransactions(user.getUserId());
+                List<Transaction> transactionList = optTransaction.get();
+                
+                for (Transaction trans : transactionList) {
+                    
+                    Double marketPrice = stockSvc.getQuote(trans.getSymbol());
+                    trans.setStockStatus(marketPrice*trans.getQuantity());
+                    System.out.println(">>>>>" + marketPrice);
+                    System.out.println(">>>>>>" + trans.getStockStatus());
+                }
+                mvc.addObject("username", username);
+                mvc.addObject("transactionList", transactionList);
+                // mvc.addObject("stockStatus", stockStatus);
+                mvc.setViewName("Homepage");
+                return mvc;
+
+            }
 
 
     
