@@ -1,6 +1,7 @@
 package vttp2022.project.Stock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import vttp2022.project.Stock.models.User;
 
 
 
@@ -72,8 +72,8 @@ public class LoginTests {
         // Get response
         MockHttpServletResponse resp = result.getResponse();
         try {
-            String homepage = resp.getRedirectedUrl();
-            assertEquals(null, homepage);
+            String login = resp.getContentAsString();
+            assertNotNull(login);
         } catch (Exception ex) {
             fail("cannot retrieve response for successful login", ex);
             return;
@@ -131,8 +131,8 @@ public class LoginTests {
         // Get response
         MockHttpServletResponse resp = result.getResponse();
         try {
-            String redirectedURL = resp.getRedirectedUrl();
-            assertEquals(null,redirectedURL);
+            String logout = resp.getContentAsString();
+            assertNotNull(logout);
         } catch (Exception ex) {
             fail("cannot retrieve response for logout", ex);
             return;
@@ -164,14 +164,12 @@ public class LoginTests {
         // Get response
         MockHttpServletResponse resp = result.getResponse();
         try {
-            String redirectedURL = resp.getRedirectedUrl();
-            assertEquals(null,redirectedURL);
+            String homepage = resp.getContentAsString();
+            assertNotNull(homepage);
         } catch (Exception ex) {
-            fail("cannot retrieve response for hompage", ex);
+            fail("cannot retrieve response for homepage", ex);
             return;
         }
     }
 
-    
-    
 }
