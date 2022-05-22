@@ -38,6 +38,11 @@ public class UserRepository {
        user.setPassword(rs.getString("password"));
         return user;
     }
+
+    // public boolean deleteUser (String username) {
+    //     int count = template.update(SQL_DELETE_USER, username);
+    //     return 1 == count;
+    // }
     
 }
 

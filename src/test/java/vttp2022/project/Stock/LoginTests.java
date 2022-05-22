@@ -87,8 +87,8 @@ public class LoginTests {
         RequestBuilder req = MockMvcRequestBuilders.post("/authenticate")
             .accept(MediaType.TEXT_HTML_VALUE)
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("username", "testabc")
-            .param("password", "testabc")
+            .param("username", "User")
+            .param("password", "user")
             .session(session);
 
         // Call the controller

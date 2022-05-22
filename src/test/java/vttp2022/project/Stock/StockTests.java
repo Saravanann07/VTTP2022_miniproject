@@ -109,7 +109,7 @@ public class StockTests {
         cal.set(Calendar.YEAR, 2022);
 
         try {
-            transSvc.addTransaction(23, cal.getTime(), "V", "Visa Inc", 3, 190.7, 572.1);
+            transSvc.addTransaction(23, cal.getTime(), "V", "Visa Inc", 3, 201.85, 605.55);
         } catch (TransactionException ex) {
             assertTrue(true);
             return;
@@ -117,22 +117,24 @@ public class StockTests {
             fail("Did not throw TransactionException");
     }
 
-    @Test
-    void insertVisaStockShouldPass() {
+    // @Test
+    // void insertVisaStockShouldPass() {
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DATE, 1);
-        cal.set(Calendar.YEAR, 2022);
+    //     Calendar cal = Calendar.getInstance();
+    //     cal.set(Calendar.MONTH, Calendar.JANUARY);
+    //     cal.set(Calendar.DATE, 1);
+    //     cal.set(Calendar.YEAR, 2022);
 
-        try {
-            transSvc.addTransaction(23, cal.getTime(), "V", "Visa Inc", 3, 190.7, 572.1);
-            assertTrue(true);
-        } catch (TransactionException ex) {
-            return;
-        }
-            fail("Did not throw TransactionException");
-    }
+    //     try {
+    //         transSvc.addTransaction(28, cal.getTime(), "V", "Visa Inc", 3, 201.85, 605.55);
+    //         assertTrue(false);
+            
+    //     } catch (TransactionException ex) {
+            
+    //         return;
+    //     }
+    //         fail("Did not throw TransactionException");
+    // }
 
     // @Test
     // public  void addTransactionSuccess(){
