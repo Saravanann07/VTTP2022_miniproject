@@ -141,6 +141,7 @@ public class UserController {
         Date purchaseDate;
         try {
             purchaseDate = format.parse(dateStr);
+            System.out.println(">>>>>>" + purchaseDate);
         } catch (ParseException e) {
             purchaseDate = null;
             e.printStackTrace();

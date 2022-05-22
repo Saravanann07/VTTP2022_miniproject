@@ -112,6 +112,37 @@ public class LoginTests {
     }
 
     @Test
+    public void successfulLoginTest(){
+
+        MockHttpSession session = new MockHttpSession();
+        RequestBuilder req = MockMvcRequestBuilders.post("/authenticate")
+            .accept(MediaType.TEXT_HTML_VALUE)
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("username", "Saravanan")
+            .param("password", "sara")
+            .session(session);
+
+        // Call the controller
+        MvcResult result = null;
+        try {
+            result = mvc.perform(req).andReturn();
+        } catch (Exception ex) {
+            fail("cannot perform mvc invocation for successful login", ex);
+            return;
+        }
+
+        // Get response
+        MockHttpServletResponse resp = result.getResponse();
+        try {
+            Integer statusCode = resp.getStatus();
+            assertEquals(202,statusCode);
+        } catch (Exception ex) {
+            fail("cannot retrieve response for successful login", ex);
+            return;
+        }
+    }
+
+    @Test
     public void logoutTest(){
 
         MockHttpSession session = new MockHttpSession();
@@ -149,8 +180,8 @@ public class LoginTests {
 
         RequestBuilder req = MockMvcRequestBuilders.get("/homepage")
             .accept(MediaType.TEXT_HTML_VALUE)
-            .sessionAttr("username", "Fred")
-            .sessionAttr("password", "fred");
+            .sessionAttr("username", "Saravanan")
+            .sessionAttr("password", "sara");
 
         // Call the controller
         MvcResult result = null;

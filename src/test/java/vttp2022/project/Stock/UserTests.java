@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import vttp2022.project.Stock.exceptions.UserException;
-import vttp2022.project.Stock.models.User;
 import vttp2022.project.Stock.repositories.UserRepository;
 import vttp2022.project.Stock.services.UserService;
 
@@ -33,15 +32,6 @@ public class UserTests {
     @Autowired
     private UserService userSvc;
 
-    // private User user;
-
-    // public UserTests() {
-    //     user = new User();
-    //     user.setUsername("User");
-    //     user.setPassword("user");
-    // }
-
-    
 
     @Test
     public void insertSaravananShouldFail() {
@@ -112,7 +102,7 @@ public class UserTests {
         try {
             result = mvc.perform(req).andReturn();
         } catch (Exception ex) {
-            fail("cannot perform mvc invocation for unsuccessful login", ex);
+            fail("cannot perform mvc invocation for unsuccessful registration", ex);
             return;
         }
 
@@ -122,7 +112,7 @@ public class UserTests {
             Integer statusCode = resp.getStatus();
             assertEquals(200,statusCode);
         } catch (Exception ex) {
-            fail("cannot retrieve response for unsuccessful login", ex);
+            fail("cannot retrieve response for unsuccessful registration", ex);
             return;
         }
     }
