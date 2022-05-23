@@ -22,4 +22,7 @@ public interface Queries {
     public static final String SQL_GET_USER_COMPANY_TRANSACTIONS = "select * from transactions where symbol = ? and user_id = ?";
 
     // public static final String SQL_DELETE_USER = "delete from users where username = ?";
+
+    public static final String SQL_SORT_TRANSACTIONS_BY_DATE = "select purchase_date, symbol, company_name, quantity, stock_price, total_price from transactions order by purchase_date desc";
+    
 }
