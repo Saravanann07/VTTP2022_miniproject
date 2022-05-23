@@ -51,6 +51,30 @@ public class LoginTests {
     }
 
     @Test
+    public void showRegisterPage() {
+
+        RequestBuilder req = MockMvcRequestBuilders.get("/register")
+                .accept(MediaType.TEXT_HTML_VALUE);
+
+        MvcResult result = null;
+        try {
+            result = mvc.perform(req).andReturn();
+        } catch (Exception ex) {
+            fail("cannot invoke registration", ex);
+            return;
+        }
+
+        MockHttpServletResponse resp = result.getResponse();
+        try {
+            Integer statusCode = resp.getStatus();
+            assertEquals(200,statusCode);
+        } catch (Exception ex) {
+            fail("cannot retrieve response for registration", ex);
+            return;
+        }
+    }
+
+    @Test
     public void loginSucces() {
 
         MockHttpSession session = new MockHttpSession();

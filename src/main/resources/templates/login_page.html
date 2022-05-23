@@ -2,16 +2,66 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
 	<title>StockStatus</title>
 </head>
 <body>
-    <h1>Welcome to StockStatus! </h1>
+	 <!-- create navigation bar (Header) -->
+	 <nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">StockStatus</a>
+			</div>
+		</div>
+	</nav>
+    <br>
+    <br>
+
+	<!-- Create HTML Login Section-->
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-md-6 col-md-offset-3" >
+
+    			<h1>Welcome to StockStatus! </h1>
     
-	<h2>Please enter your login details</h2>
+				<h2>Please enter your login details</h2>
 
-	<form method="POST" action="/authenticate">
+				<form method="POST" action="/authenticate">
+					<div class = "form-group">
+                        <label class = "control-label" for="username">
+                                Username
+                        </label>
+                        <input id = "username" class = "form-control" type="text" name="username"  required autofocus="autofocus"/>
+                    </div>
 
-		<table>
+					<div class="form-group">
+						<label class="control-label" for="password"> Password </label> <input
+							id="password" class="form-control" type="password"
+							name="password" required autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Login</button>
+						<span>Don't have an account? <a href="/register" >Register here</a></span>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+		<!-- <table>
 			<tr>
 				<td>
 					<label for="username">Username</label>
@@ -29,14 +79,17 @@
 				</td>
 			</tr>
 			
-		</table>
-		<button type="submit">Login</button>
-	</form>
+		</table> -->
+		<!-- <button type="submit">Login</button> -->
+				<!-- </form>
+			</div>
+		</div>
+	</div> -->
 
-	<h2>Don't have an account?</h2>
-	<h3>Register here!</h3>
+	<!-- <h2>Don't have an account?</h2>
+	<h3>Register here!</h3> -->
 
-	<form data-th-action="@{/createUser}" method="post">
+	<!-- <form data-th-action="@{/createUser}" method="post">
 		<table>
 			<tr>
 				<td>
@@ -61,7 +114,7 @@
       </form>
 	  <span data-th-text="${messageUser}"></span>
 
-
+ -->
 
 	
 </body>

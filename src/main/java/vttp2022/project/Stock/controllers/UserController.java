@@ -46,8 +46,13 @@ public class UserController {
     private StockService stockSvc;
 
     @GetMapping(path="")
-    public String AddUser(Model model){
+    public String getLoginPage(Model model){
         return "login_page";
+    }
+
+    @GetMapping(path="/register")
+    public String getRegisterPage(Model model){
+        return "register";
     }
 
     @GetMapping(path="/logout")
@@ -77,7 +82,7 @@ public class UserController {
             ex.printStackTrace();
         }
 
-        mvc.setViewName("login_page");
+        mvc.setViewName("register");
         return mvc;
     }
 
