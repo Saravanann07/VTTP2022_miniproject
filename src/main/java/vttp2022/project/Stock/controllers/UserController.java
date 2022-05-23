@@ -59,6 +59,7 @@ public class UserController {
     public ModelAndView getLogout(HttpSession sess) {
         sess.invalidate();
         ModelAndView mvc = new ModelAndView();
+        mvc.addObject("messageLogout", "You have successfully logged out");
         mvc.setViewName("login_page");
 
         return mvc;
@@ -74,7 +75,7 @@ public class UserController {
 
         try {
             userSvc.createUser(username, password);
-            mvc.addObject("messageUser", "%s has been successully registered".formatted(username));
+            mvc.addObject("messageUser", "%s has been successfully registered".formatted(username));
 
         } catch (UserException ex) {
             mvc.addObject("messageUser", "Error: %s".formatted(ex.getReason()));
@@ -100,7 +101,8 @@ public class UserController {
             // not successful
             if (!userSvc.authenticate(username, password)) {
                 mvc.setStatus(HttpStatus.UNAUTHORIZED);
-                mvc.setViewName("login_error");
+                mvc.addObject("messageLoginError", "Error! Invalid username or password");
+                mvc.setViewName("login_page");
                 // return mvc;
 
              //successful   

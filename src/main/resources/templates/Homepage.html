@@ -5,45 +5,104 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Success</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+    
 </head>
 <body>
-    <h1>You have successfully logged in to StockStatus!</h1>
-    <h2>Welcome <span data-th-text="${username}"></span></h2>
-    <h3>My stock purchase history</h3>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#" th:href="@{/homepage}">StockStatus</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#" th:href="@{/homepage}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
+              </li>
+        <!-- Navbar content -->
+      </nav>
+      
+    <!-- <nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a style="text-align:center" class="navbar-brand" href="#" th:href="@{/homepage}">StockStatus</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+            </div>
+		</div>
+	</nav> -->
 
-    <table border="1">
-        <tbody>
+	<br>
+	<br>
+    
+
+    <div class="container">
+        <h1 style="text-align:center">You have successfully logged in to StockStatus!</h1>
+         <h2 style="text-align:center">Welcome <span data-th-text="${username}"></span>!</h2>
+
+    </div>
+                
+
+    <!-- <h1>You have successfully logged in to StockStatus!</h1>
+    <h2>Welcome <span data-th-text="${username}"></span></h2> -->
+    
+    <h3 style="text-align:center">My stock purchase history</h3>
+
+    <table class="table" border="1">
+        <thead class="thead-dark">
+        <!-- <tbody> -->
             <!-- <th>Transaction ID</th> -->
-            <th>Date of Purchase</th>
-            <th>Ticker</th>
-            <th>Company Name</th>
-            <th>Quantity</th>
-            <th>Price per share (US$)</th>
-            <th>Total price (US$)</th>
-            <th>Status</th>
-
+            <th style="text-align:center">Date of Purchase</th>
+            <th style="text-align:center">Ticker</th>
+            <th style="text-align:center">Company Name</th>
+            <th style="text-align:center">Quantity</th>
+            <th style="text-align:center">Price per share (US$)</th>
+            <th style="text-align:center">Total price (US$)</th>
+            <th style="text-align:center">Market Value (US$)</th>
+        </thead>
+        <tbody>
             <tr data-th-each="transaction: ${transactionList}">
                     <!-- <td data-th-text="${transaction.getTransactionId}"></td> -->
-                    <td data-th-text="${transaction.getPurchaseDate}"></td>
-                    <td data-th-text="${transaction.getSymbol}"></td>
-                    <td data-th-text="${transaction.getCompanyName}"></td>
-                    <td data-th-text="${transaction.getQuantity}"></td>
-                    <td data-th-text="${transaction.getStockPrice}"></td>
-                    <td data-th-text="${transaction.getTotalPrice}"></td>
-                    <td data-th-text="${transaction.getStockStatus}"></td>
-
+                    <td style="text-align:center" data-th-text="${transaction.getPurchaseDate}"></td>
+                    <td style="text-align:center" data-th-text="${transaction.getSymbol}"></td>
+                    <td style="text-align:center" data-th-text="${transaction.getCompanyName}"></td>
+                    <td style="text-align:center" data-th-text="${transaction.getQuantity}"></td>
+                    <td style="text-align:center" data-th-text="${transaction.getStockPrice}"></td>
+                    <td style="text-align:center" data-th-text="${transaction.getTotalPrice}"></td>
+                    <b><td style="text-align:center" data-th-text="${transaction.getStockStatus}"></td></b>
             </tr>
         </tbody>
     </table>
     <br>
     <br>
     <br>
-    <h3>Made a trade recently? Add your purchase here</h3>
+    <div class="col-auto">
+    <h3 style="text-align:center">Made a trade recently? Add your purchase here</h3>
+    </div>
+    <div class="col-auto">
     <form 
         data-th-action="@{/addTransaction}"
         method="post"
         style="margin: 0; padding: 0"
      >
+     <div class = "form-row">
      <div>
         <input
         style="display: inline"
@@ -82,6 +141,7 @@
       type="number" step="0.01"
       name="totalPrice"
       id="total_price"
+      size="50"
       placeholder="Total cost of stock purchase"
       />
 
@@ -92,17 +152,27 @@
     placeholder="User"
     /> -->
      </div>
+     </div>
      <br>
      <br>
-        <button style="display: inline" type="submit">Add stock purchase</button>
+     <div class="col-auto">
+        <button style="display: inline" class="btn btn-primary mb-2" type="submit">Add stock purchase</button>
+    </div>
+    </div>
     </form>
+    
     <br>
     <br>
     <br>
     <form>
-    <button type="submit" formmethod="GET" formaction="/logout">
+    <!-- <button type="submit" formmethod="GET" formaction="/logout">
         Logout
-    </button>
+    </button> -->
     </form>
+     <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
