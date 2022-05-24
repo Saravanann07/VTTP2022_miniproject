@@ -39,6 +39,8 @@
             <th style="text-align:center">Price per share (US$)</th>
             <th style="text-align:center">Total price (US$)</th>
             <th style="text-align:center">Market Value (US$)</th>
+            <!-- <th style="text-align:centre">Update</th> -->
+
         </thead>
         <tbody>
             <tr data-th-each="transaction: ${allPurchasesList}">
@@ -50,6 +52,13 @@
                     <td style="text-align:center" data-th-text="${transaction.getStockPrice}"></td>
                     <td style="text-align:center" data-th-text="${transaction.getTotalPrice}"></td>
                     <td style="text-align:center; font-weight:bold;" data-th-text="${transaction.getStockStatus}"></td>
+                    <!-- <td style="text-align:centre">
+                      <form data-th-action="@{/deleteTransaction}" method="post">
+                      <button type="submit" class="btn btn-danger" >Delete
+
+                      </button>
+                    </form>
+                    </td> -->
 
             </tr>
         </tbody>

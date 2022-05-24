@@ -62,6 +62,14 @@ public class TransactionService {
         return Optional.of(datesList);
     }
 
+    // public boolean deleteTransaction(Double totalPrice) {
+    //         boolean deleteTransaction= transactionRepo.deleteTransaction(totalPrice);
+    
+    //         if (deleteTransaction)
+    //             return true;
+    //         return false;
+    //     }
+
     
     
 }

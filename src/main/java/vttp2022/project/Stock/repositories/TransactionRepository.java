@@ -79,6 +79,11 @@ public class TransactionRepository {
         }
         return Optional.of(dateTransactions);
 
-
     }
+
+    // public boolean deleteTransaction (Double totalPrice) {
+    //         int count = template.update(SQL_DELETE_USER_TRANSACTIONS, totalPrice);
+    //         return 1 == count;
+    //     }
+
 }

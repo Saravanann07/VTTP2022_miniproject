@@ -264,6 +264,54 @@ public class UserController {
 
             }
 
+            // @PostMapping(path="/deleteTransaction")
+            // public ModelAndView deleteTransaction(Double totalPrice, String symbol, HttpSession sess) {
+                
+            //         String username = (String) sess.getAttribute("username");
+            //         String password = (String) sess.getAttribute("password");
+
+                    
+                    
+        
+        
+            //     ModelAndView mvc = new ModelAndView();
+            //     User user = userRepository.getUser(username, password);
+                
+            //     transactionSvc.deleteTransaction(totalPrice);
+            //     mvc.addObject("deleteMessage", "Transaction from %s has been deleted".formatted(symbol));
+                
+            
+            //     // try {
+            //     //     transactionSvc.addTransaction(user.getUserId(), purchaseDate, symbol, companyName, quantity, stockPrice, totalPrice);
+            //     //     mvc.addObject("transactionUser", "%s has been successfully added to your stock purchases".formatted(symbol));
+        
+            //     // } catch (TransactionException ex) {
+            //     //     mvc.addObject("transactionMessage", "error: %s".formatted(ex.getReason()));
+            //     //     mvc.setStatus(HttpStatus.BAD_REQUEST);
+            //     //     ex.printStackTrace();
+                    
+            //     // }
+            //     System.out.println(">>>>>>>>>errrrorrrrr");
+        
+            //     Optional<List<Transaction>> optTransaction = transactionSvc.getDateTransactions(user.getUserId());
+            //     List<Transaction> transactionList = optTransaction.get();
+                
+            //     for (Transaction trans : transactionList) {
+                    
+            //         Double marketPrice = stockSvc.getQuote(trans.getSymbol());
+            //         Double marketValue = marketPrice*trans.getQuantity();
+            //         BigDecimal bd = new BigDecimal(Double.toString(marketValue));
+            //         bd = bd.setScale(2, RoundingMode.HALF_DOWN);
+            //         trans.setStockStatus(bd);
+            //         System.out.println(">>>>>" + marketPrice);
+            //         System.out.println(">>>>>>" + trans.getStockStatus());
+            //     }
+            //     mvc.addObject("username", username);
+            //     mvc.addObject("transactionList", transactionList);
+            //     mvc.setViewName("Homepage");
+            //     return mvc;
+            // }
+
 
     
 }

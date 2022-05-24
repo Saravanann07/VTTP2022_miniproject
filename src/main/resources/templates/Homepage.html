@@ -48,6 +48,7 @@
             <th style="text-align:center">Price per share (US$)</th>
             <th style="text-align:center">Total price (US$)</th>
             <th style="text-align:center">Market Value (US$)</th>
+            <!-- <th style="text-align:centre">Update</th> -->
         </thead>
         <tbody>
             <tr data-th-each="transaction: ${transactionList}">
@@ -58,6 +59,7 @@
                     <td style="text-align:center" data-th-text="${transaction.getStockPrice}"></td>
                     <td style="text-align:center" data-th-text="${transaction.getTotalPrice}"></td>
                     <b><td style="text-align:center; font-weight:bold;" data-th-text="${transaction.getStockStatus}"></td></b>
+                    <!-- <td><button type="button" class="btn btn-danger" href="/homepage">Delete</button></td> -->
             </tr>
         </tbody>
     </table>

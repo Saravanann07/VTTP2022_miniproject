@@ -21,6 +21,8 @@ public interface Queries {
 
     public static final String SQL_SORT_TRANSACTIONS_BY_DATE = "select * from transactions where user_id = ? order by purchase_date desc";
 
+    // public static final String SQL_DELETE_USER_TRANSACTIONS = "delete from transactions where total_price = ?";
+
 
     
 }
