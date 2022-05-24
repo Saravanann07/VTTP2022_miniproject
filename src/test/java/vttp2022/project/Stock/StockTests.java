@@ -197,14 +197,7 @@ public class StockTests {
     void deleteTestTransaction() {
 
         String SQL_DELETE_TRANSACTIONS = "delete from transactions where stock_price = ?";
-        template.update(SQL_DELETE_TRANSACTIONS, 1.00);
-
-        // void deleteSAR() {
-        //     // userSvc.deleteUser("SAR");
-    
-        //     String SQL_DELETE_USER = "delete from users where username = ?";
-        //     template.update(SQL_DELETE_USER, "SAR");
-    
+        template.update(SQL_DELETE_TRANSACTIONS, 1.00);    
 
     }
 

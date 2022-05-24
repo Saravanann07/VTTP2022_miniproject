@@ -35,14 +35,7 @@ import vttp2022.project.Stock.repositories.UserRepository;
         }
     }
 
-    // public boolean deleteUser(String username) {
-    //     boolean deleteUser = userRepo.deleteUser(username);
-
-    //     if (deleteUser)
-    //         return true;
-
-    //     return false;
-    // }
+    
 
 
     

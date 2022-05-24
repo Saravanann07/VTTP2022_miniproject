@@ -1,5 +1,6 @@
 package vttp2022.project.Stock.models;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Transaction {
@@ -11,9 +12,9 @@ public class Transaction {
     private Integer quantity;
     private Double stockPrice;
     private Double totalPrice;
-    private Double stockStatus;
-   
+    private BigDecimal stockStatus;
 
+    
     public Integer getTransactionId() {
         return transactionId;
     }
@@ -57,10 +58,10 @@ public class Transaction {
         this.totalPrice = totalPrice;
     }
 
-    public Double getStockStatus() {
+    public BigDecimal getStockStatus() {
         return stockStatus;
     }
-    public void setStockStatus(Double stockStatus) {
+    public void setStockStatus(BigDecimal stockStatus) {
         this.stockStatus = stockStatus;
     }
 

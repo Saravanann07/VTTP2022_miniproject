@@ -1,5 +1,7 @@
 package vttp2022.project.Stock.controllers;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -109,12 +111,19 @@ public class UserController {
             } else{     
             mvc.addObject("username", username);
 
-            Optional<List<Transaction>> optTransaction = transactionSvc.getUserTransactions(user.getUserId());
+            Optional<List<Transaction>> optTransaction = transactionSvc.getDateTransactions(user.getUserId());
+
             List<Transaction> transactionList = optTransaction.get();
             for (Transaction trans : transactionList) {
+
+                 
                 //Gets market value of stocks everytime user refreshes page
                 Double marketPrice = stockSvc.getQuote(trans.getSymbol());
-                trans.setStockStatus(marketPrice*trans.getQuantity());
+                Double marketValue = marketPrice*trans.getQuantity();
+                BigDecimal bd = new BigDecimal(Double.toString(marketValue));
+                bd = bd.setScale(2, RoundingMode.HALF_DOWN);
+                trans.setStockStatus(bd);
+
                 System.out.println(">>>>>" + marketPrice);
                 System.out.println(">>>>>>" + trans.getStockStatus());
             }
@@ -174,20 +183,21 @@ public class UserController {
         }
         System.out.println(">>>>>>>>>errrrorrrrr");
 
-        Optional<List<Transaction>> optTransaction = transactionSvc.getUserTransactions(user.getUserId());
+        Optional<List<Transaction>> optTransaction = transactionSvc.getDateTransactions(user.getUserId());
         List<Transaction> transactionList = optTransaction.get();
         
         for (Transaction trans : transactionList) {
             
             Double marketPrice = stockSvc.getQuote(trans.getSymbol());
-            trans.setStockStatus(marketPrice*trans.getQuantity());
+            Double marketValue = marketPrice*trans.getQuantity();
+            BigDecimal bd = new BigDecimal(Double.toString(marketValue));
+            bd = bd.setScale(2, RoundingMode.HALF_DOWN);
+            trans.setStockStatus(bd);
             System.out.println(">>>>>" + marketPrice);
             System.out.println(">>>>>>" + trans.getStockStatus());
         }
         mvc.addObject("username", username);
-        // mvc.addObject("transactionUser", "%s has been successfully added to your stock purchases".formatted(symbol));
         mvc.addObject("transactionList", transactionList);
-        // mvc.addObject("stockStatus", stockStatus);
         mvc.setViewName("Homepage");
         return mvc;
     }
@@ -209,13 +219,15 @@ public class UserController {
             for (Transaction trans : allPurchasesList) {
             
                 Double marketPrice = stockSvc.getQuote(trans.getSymbol());
-                trans.setStockStatus(marketPrice*trans.getQuantity());
+                Double marketValue = marketPrice*trans.getQuantity();
+                BigDecimal bd = new BigDecimal(Double.toString(marketValue));
+                bd = bd.setScale(2, RoundingMode.HALF_DOWN);
+                trans.setStockStatus(bd);
                 System.out.println(">>>>>" + marketPrice);
                 System.out.println(">>>>>>" + trans.getStockStatus());
             }
 
             mvc.addObject("allPurchasesList", allPurchasesList);
-            // mvc.setStatus(HttpStatus.OK);
             mvc.setViewName("company");
 
             return mvc;
@@ -231,19 +243,22 @@ public class UserController {
 
                 User user = userRepository.getUser(username, password);
 
-                Optional<List<Transaction>> optTransaction = transactionSvc.getUserTransactions(user.getUserId());
+                Optional<List<Transaction>> optTransaction = transactionSvc.getDateTransactions(user.getUserId());
+
                 List<Transaction> transactionList = optTransaction.get();
                 
                 for (Transaction trans : transactionList) {
                     
                     Double marketPrice = stockSvc.getQuote(trans.getSymbol());
-                    trans.setStockStatus(marketPrice*trans.getQuantity());
+                    Double marketValue = marketPrice*trans.getQuantity();
+                    BigDecimal bd = new BigDecimal(Double.toString(marketValue));
+                    bd = bd.setScale(2, RoundingMode.HALF_DOWN);
+                    trans.setStockStatus(bd);
                     System.out.println(">>>>>" + marketPrice);
                     System.out.println(">>>>>>" + trans.getStockStatus());
                 }
                 mvc.addObject("username", username);
                 mvc.addObject("transactionList", transactionList);
-                // mvc.addObject("stockStatus", stockStatus);
                 mvc.setViewName("Homepage");
                 return mvc;
 

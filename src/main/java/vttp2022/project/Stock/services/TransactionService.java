@@ -17,18 +17,7 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepo;
 
-    public Optional<List<Transaction>> getUserTransactions (int userId) {
-
-        Optional<List<Transaction>> opt = transactionRepo.getUserTransactions(userId);
-
-        if (opt.isEmpty()) {
-            return Optional.empty();
-        }
-
-        List<Transaction> transactionsList = opt.get();
-
-        return Optional.of(transactionsList);
-    }
+    
 
     public Optional<List<Transaction>> getCompanyTransactions (String symbol, int userId) {
 
@@ -59,5 +48,20 @@ public class TransactionService {
             }
         }
     }
+
+    public Optional<List<Transaction>> getDateTransactions (int userId) {
+
+        Optional<List<Transaction>> opt = transactionRepo.getTransactionsDate(userId);
+
+        if (opt.isEmpty()) {
+            return Optional.empty();
+        }
+
+        List<Transaction> datesList = opt.get();
+
+        return Optional.of(datesList);
+    }
+
+    
     
 }

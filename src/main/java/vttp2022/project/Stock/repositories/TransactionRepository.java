@@ -37,26 +37,6 @@ public class TransactionRepository {
 
     }
 
-    public Optional<List<Transaction>> getUserTransactions(int userId) {
-
-        List<Transaction> userTransactions = new LinkedList<>();
-        final SqlRowSet rs = template.queryForRowSet(SQL_SELECT_USER_TRANSACTIONS, userId);
-
-        while (rs.next()) {
-            Transaction transaction = new Transaction();
-            transaction.setTransactionId(rs.getInt("transaction_id")); //int
-            transaction.setPurchaseDate(rs.getDate("purchase_date")); // date
-            transaction.setSymbol(rs.getString("symbol")); // string
-            transaction.setCompanyName(rs.getString("company_name")); // string;
-            transaction.setQuantity(rs.getInt("quantity")); // int
-            transaction.setStockPrice(rs.getDouble("stock_price")); // double
-            transaction.setTotalPrice(rs.getDouble("total_price")); // double
-            // transaction.setStockStatus(rs.getDouble("stock_status")); //double
-
-            userTransactions.add(transaction);
-        }
-        return Optional.of(userTransactions);
-    }
 
     public Optional<List<Transaction>> getUserCompanyTransactions(String symbol, int userId) {
 
@@ -78,4 +58,27 @@ public class TransactionRepository {
         }
         return Optional.of(companyTransactions);    
     }  
+
+    public Optional<List<Transaction>> getTransactionsDate(int userId) {
+
+        List<Transaction> dateTransactions = new LinkedList<>();
+        final SqlRowSet rs = template.queryForRowSet(SQL_SORT_TRANSACTIONS_BY_DATE, userId);
+
+        while (rs.next()) {
+            Transaction date = new Transaction();
+            date.setTransactionId(rs.getInt("transaction_id")); //int
+            date.setPurchaseDate(rs.getDate("purchase_date")); // date
+            date.setSymbol(rs.getString("symbol")); // string
+            date.setCompanyName(rs.getString("company_name")); // string;
+            date.setQuantity(rs.getInt("quantity")); // int
+            date.setStockPrice(rs.getDouble("stock_price")); // double
+            date.setTotalPrice(rs.getDouble("total_price")); // double
+            // transaction.setStockStatus(rs.getDouble("stock_status")); //double
+
+            dateTransactions.add(date);
+        }
+        return Optional.of(dateTransactions);
+
+
+    }
 }

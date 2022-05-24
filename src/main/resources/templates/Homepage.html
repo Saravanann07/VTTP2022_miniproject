@@ -29,45 +29,18 @@
         <!-- Navbar content -->
       </nav>
       
-    <!-- <nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a style="text-align:center" class="navbar-brand" href="#" th:href="@{/homepage}">StockStatus</a>
-			</div>
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li><a th:href="@{/logout}">Logout</a></li>
-				</ul>
-            </div>
-		</div>
-	</nav> -->
-
-
     
-
     <div class="container">
-        <h2 style="text-align:center">You have successfully logged in to StockStatus!</h2>
-         <h2 style="text-align:center">Welcome <span data-th-text="${username}"></span>!</h2>
+        <h2 style="text-align:center; font-style: italic;">You have successfully logged in to StockStatus!</h2>
+         <h2 style="text-align:center; font-style: italic;">Welcome <span data-th-text="${username}"></span>!</h2>
 
     </div>
                 
-
-    <!-- <h1>You have successfully logged in to StockStatus!</h1>
-    <h2>Welcome <span data-th-text="${username}"></span></h2> -->
     
     <h3 style="text-align:center">My stock purchase history</h3>
 
     <table class="table" border="1">
         <thead class="thead-dark">
-        <!-- <tbody> -->
-            <!-- <th>Transaction ID</th> -->
             <th style="text-align:center">Date of Purchase</th>
             <th style="text-align:center">Ticker</th>
             <th style="text-align:center">Company Name</th>
@@ -78,14 +51,13 @@
         </thead>
         <tbody>
             <tr data-th-each="transaction: ${transactionList}">
-                    <!-- <td data-th-text="${transaction.getTransactionId}"></td> -->
                     <td style="text-align:center" data-th-text="${transaction.getPurchaseDate}"></td>
                     <td style="text-align:center" data-th-text="${transaction.getSymbol}"></td>
                     <td style="text-align:center" data-th-text="${transaction.getCompanyName}"></td>
                     <td style="text-align:center" data-th-text="${transaction.getQuantity}"></td>
                     <td style="text-align:center" data-th-text="${transaction.getStockPrice}"></td>
                     <td style="text-align:center" data-th-text="${transaction.getTotalPrice}"></td>
-                    <b><td style="text-align:center" data-th-text="${transaction.getStockStatus}"></td></b>
+                    <b><td style="text-align:center; font-weight:bold;" data-th-text="${transaction.getStockStatus}"></td></b>
             </tr>
         </tbody>
     </table>
@@ -94,7 +66,7 @@
     <h3 style="text-align:center">Made a trade recently? Add your purchase here</h3>
     </div>
     <br>
-    <div class="col-md-10 col-md-offset-2">
+    <div class="col-md-10 col-md-offset-3">
     <form 
         data-th-action="@{/addTransaction}"
         method="post"
@@ -143,19 +115,14 @@
       placeholder="Total cost of stock purchase"
       />
 
-    <!-- <input
-    style="display: inline"
-    type="number" 
-    name="userId"
-    placeholder="User"
-    /> -->
+    
      </div>
      </div>
      <br>
      <br>
      <div class = "container">
       <div class = "row ">
-        <div class="col-sm-6 col-md-offset-4">
+        <div class="col-sm-6 col-md-offset-2">
           <button style="display: inline" class="btn btn-primary mb-2" type="submit">Add stock purchase</button>
         </div>
       </div>
