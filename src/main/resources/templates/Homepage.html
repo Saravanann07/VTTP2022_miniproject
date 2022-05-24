@@ -49,12 +49,11 @@
 		</div>
 	</nav> -->
 
-	<br>
-	<br>
+
     
 
     <div class="container">
-        <h1 style="text-align:center">You have successfully logged in to StockStatus!</h1>
+        <h2 style="text-align:center">You have successfully logged in to StockStatus!</h2>
          <h2 style="text-align:center">Welcome <span data-th-text="${username}"></span>!</h2>
 
     </div>
@@ -90,13 +89,12 @@
             </tr>
         </tbody>
     </table>
-    <br>
-    <br>
-    <br>
+   
     <div class="col-auto">
     <h3 style="text-align:center">Made a trade recently? Add your purchase here</h3>
     </div>
-    <div class="col-auto">
+    <br>
+    <div class="col-md-10 col-md-offset-2">
     <form 
         data-th-action="@{/addTransaction}"
         method="post"
@@ -155,15 +153,26 @@
      </div>
      <br>
      <br>
-     <div class="col-auto">
-        <button style="display: inline" class="btn btn-primary mb-2" type="submit">Add stock purchase</button>
+     <div class = "container">
+      <div class = "row ">
+        <div class="col-sm-6 col-md-offset-4">
+          <button style="display: inline" class="btn btn-primary mb-2" type="submit">Add stock purchase</button>
+        </div>
+      </div>
     </div>
     </div>
     </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="alert alert-info" data-th-text="${transactionUser}"></div>
+	  <div class="alert alert-danger" data-th-text="${transactionMessage}"></div>
     
-    <br>
-    <br>
-    <br>
     <form>
     <!-- <button type="submit" formmethod="GET" formaction="/logout">
         Logout

@@ -20,7 +20,6 @@ create table transactions (
     quantity int not null,
     stock_price float (7,2) not null,
     total_price float (10,2) not null,
-    stock_status float (10,2) not null,
     user_id int not null,
     
     foreign key (user_id) references users (user_id),

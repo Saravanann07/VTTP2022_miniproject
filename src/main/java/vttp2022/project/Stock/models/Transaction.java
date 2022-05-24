@@ -12,8 +12,8 @@ public class Transaction {
     private Double stockPrice;
     private Double totalPrice;
     private Double stockStatus;
+   
 
-  
     public Integer getTransactionId() {
         return transactionId;
     }
